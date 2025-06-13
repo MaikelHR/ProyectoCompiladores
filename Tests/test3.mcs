@@ -1,0 +1,25 @@
+class Test3 {
+    int[] arr1;
+    int[] arr2;
+    
+    void main() {
+        arr1 = arr2;  // Error: no se permite asignación directa de arreglos
+        
+        int x = 5;
+        int y = 10;
+        bool z = x + y;  // Error: operación aritmética en asignación a bool
+        
+        if (x + y) {  // Error: condición debe ser bool
+            // ...
+        }
+        
+        int a = true;  // Error: tipo incompatible
+        bool b = 5;    // Error: tipo incompatible
+        
+        return;  // OK: return sin valor en función void
+    }
+    
+    int funcion() {
+        return;  // Error: falta valor de retorno
+    }
+} 

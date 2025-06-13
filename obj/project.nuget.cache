@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "+tD6uhymNIg=",
+  "success": true,
+  "projectFilePath": "D:\\TEC\\Compiladores3\\ProyectoCompi\\ProyectoCompi\\ProyectoCompi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maike\\.nuget\\packages\\antlr4.runtime.standard\\4.13.1\\antlr4.runtime.standard.4.13.1.nupkg.sha512"
+  ],
+  "logs": []
+}

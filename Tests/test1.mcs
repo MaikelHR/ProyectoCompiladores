@@ -1,0 +1,22 @@
+class Test1 {
+    int[] numeros;
+    char[] letras;
+    
+    int suma(int a, int b) {
+        return a + b;
+    }
+    
+    bool esMayor(int x, int y) {
+        return x > y;
+    }
+    
+    void main() {
+        int a = 5;
+        int b = 10;
+        bool resultado = esMayor(a, b);
+        
+        if (resultado) {
+            int suma = suma(a, b);
+        }
+    }
+} 

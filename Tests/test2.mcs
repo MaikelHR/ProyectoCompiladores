@@ -1,0 +1,24 @@
+class Test2 {
+    string[] textos;  // Error: arreglos solo pueden ser int[] o char[]
+    double[] numeros; // Error: arreglos solo pueden ser int[] o char[]
+    
+    int suma(int a, int b) {
+        return a + b;
+    }
+    
+    bool esMayor(int x, int y) {
+        return x > y;
+    }
+    
+    void main() {
+        int a = 5;
+        string b = "10";  // Error: tipo incompatible
+        bool resultado = esMayor(a, b);  // Error: tipo incompatible
+        
+        if (resultado) {
+            int suma = suma(a, b);  // Error: tipo incompatible
+        }
+        
+        return 5;  // Error: return en función void
+    }
+} 
