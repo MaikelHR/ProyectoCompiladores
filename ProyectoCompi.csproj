@@ -41,6 +41,7 @@
     <Compile Include="Gen\CodeGeneratorVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Semantics\*.cs" />
+  
   </ItemGroup>
 
   <ItemGroup>

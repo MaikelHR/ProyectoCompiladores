@@ -12,7 +12,7 @@ class Test2 {
     
     void main() {
         int a = 5;
-        string b = "10";  // Error: tipo incompatible
+        string b = "10";  
         bool resultado = esMayor(a, b);  // Error: tipo incompatible
         
         if (resultado) {

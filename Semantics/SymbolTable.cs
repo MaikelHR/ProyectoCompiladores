@@ -39,6 +39,7 @@ namespace ProyectoCompi.Semantics
     public class ArrayType : SymbolType
     {
         public SymbolType BaseType { get; }
+        private static List<string> _errors = new List<string>();
 
         public ArrayType(SymbolType baseType)
         {
@@ -47,14 +48,29 @@ namespace ProyectoCompi.Semantics
             {
                 if (simpleType.Name != "int" && simpleType.Name != "char")
                 {
-                    throw new Exception("Arrays can only be of type int or char");
+                    _errors.Add("Los arreglos solo pueden ser de tipo int[] o char[]");
                 }
             }
             else
             {
-                throw new Exception("Arrays cannot be of class type");
+                _errors.Add("Los arreglos no pueden ser de tipo clase");
             }
             BaseType = baseType;
+        }
+
+        public static bool HasErrors()
+        {
+            return _errors.Count > 0;
+        }
+
+        public static IEnumerable<string> GetErrors()
+        {
+            return _errors;
+        }
+
+        public static void ClearErrors()
+        {
+            _errors.Clear();
         }
 
         public override bool IsAssignableTo(SymbolType other)
@@ -125,6 +141,7 @@ namespace ProyectoCompi.Semantics
         private readonly SymbolTable _parent;
         private readonly List<SymbolTable> _children;
         private readonly bool _isGlobalScope;
+        private static List<string> _errors = new List<string>();
 
         /// <summary>
         /// Crea una nueva tabla de símbolos. Si es global, inicializa los símbolos predefinidos.
@@ -184,7 +201,8 @@ namespace ProyectoCompi.Semantics
         {
             if (_symbols.ContainsKey(symbol.Name))
             {
-                throw new Exception($"Symbol '{symbol.Name}' is already defined in this scope");
+                _errors.Add($"El símbolo '{symbol.Name}' ya está definido en este ámbito");
+                return;
             }
             _symbols[symbol.Name] = symbol;
         }
@@ -226,6 +244,21 @@ namespace ProyectoCompi.Semantics
             {
                 child.Clear();
             }
+        }
+
+        public static bool HasErrors()
+        {
+            return _errors.Count > 0;
+        }
+
+        public static IEnumerable<string> GetErrors()
+        {
+            return _errors;
+        }
+
+        public static void ClearErrors()
+        {
+            _errors.Clear();
         }
     }
 } 

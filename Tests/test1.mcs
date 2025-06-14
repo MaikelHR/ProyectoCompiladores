@@ -16,7 +16,7 @@ class Test1 {
         bool resultado = esMayor(a, b);
         
         if (resultado) {
-            int suma = suma(a, b);
+            int sumando = suma(a, b);
         }
     }
 } 
