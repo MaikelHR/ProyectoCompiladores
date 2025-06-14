@@ -10,34 +10,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Grammar\MiniCSharpLexer.g4" />
-    <None Include="Grammar\MiniCSharpParser.g4" />
+    <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.3" />
+    <PackageReference Include="Antlr4BuildTasks" Version="8.13.1" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Antlr4 Include="Grammar\MiniCSharpLexer.g4">
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>ProyectoCompi.CodeGen</CustomToolNamespace>
+      <Visitor>true</Visitor>
+      <Listener>true</Listener>
+      <Order>1</Order>
     </Antlr4>
     <Antlr4 Include="Grammar\MiniCSharpParser.g4">
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>ProyectoCompi.CodeGen</CustomToolNamespace>
+      <Visitor>true</Visitor>
+      <Listener>true</Listener>
+      <Order>2</Order>
     </Antlr4>
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Grammar\antlr-4.9.3-complete.jar" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Gen\CodeGeneratorVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Semantics\*.cs" />
-    <Compile Include="CodeGen\MiniCSharpLexer.cs" />
-    <Compile Include="CodeGen\MiniCSharpParser.cs" />
-    <Compile Include="CodeGen\MiniCSharpParserBaseListener.cs" />
-    <Compile Include="CodeGen\MiniCSharpParserBaseVisitor.cs" />
-    <Compile Include="CodeGen\MiniCSharpParserListener.cs" />
-    <Compile Include="CodeGen\MiniCSharpParserVisitor.cs" />
   </ItemGroup>
 
   <ItemGroup>

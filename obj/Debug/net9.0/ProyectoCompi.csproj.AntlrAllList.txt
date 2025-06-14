@@ -1,0 +1,6 @@
+obj\Debug\net9.0\MiniCSharpLexer.cs
+obj\Debug\net9.0\MiniCSharpParser.cs
+obj\Debug\net9.0\MiniCSharpParserListener.cs
+obj\Debug\net9.0\MiniCSharpParserBaseListener.cs
+obj\Debug\net9.0\MiniCSharpParserVisitor.cs
+obj\Debug\net9.0\MiniCSharpParserBaseVisitor.cs

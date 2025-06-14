@@ -1,62 +1,55 @@
-@lexer::header {
-using Antlr4.Runtime;
-}
-
 lexer grammar MiniCSharpLexer;
 
-// Comentarios
-COMMENT_LINE    : '//' ~[\r\n]* -> skip ;
-COMMENT_BLOCK   : '/*' .*? '*/' -> skip ;
+@header {
+    using Antlr4.Runtime;
+}
 
-// Espacios en blanco
-WS              : [ \t\r\n]+ -> skip ;
+options { 
+    language=CSharp;
+}
 
-// Identificadores
-fragment LETTER : [a-zA-Z_] ;
-fragment DIGIT  : [0-9] ;
-ID              : LETTER (LETTER | DIGIT)* ;
-
-// Constantes numéricas
-INT             : '0' | [1-9] DIGIT* ;
-DOUBLE          : INT '.' DIGIT+ ;
-
-// Constantes carácter
-CHAR            : '\'' (ESC | ~['\\\r\n]) '\'' ;
-fragment ESC    : '\\' [btnfr"'\\] ;
-
-// Constantes string
-STRING          : '"' (ESC | ~["\\\r\n])* '"' ;
+// Tokens
+CLASS: 'class';
+IF: 'if';
+ELSE: 'else';
+WHILE: 'while';
+RETURN: 'return';
+INT_TYPE: 'int';
+CHAR_TYPE: 'char';
+DOUBLE_TYPE: 'double';
+BOOL_TYPE: 'bool';
+STRING_TYPE: 'string';
 
 // Operadores
-ASSIGN          : '=' ;
-RELOP           : '==' | '!=' | '<' | '<=' | '>' | '>=' ;
-ADDOP           : '+' | '-' ;
-MULOP           : '*' | '/' | '%' ;
-LOGOP           : '||' | '&&' ;
+ASSIGN: '=';
+ADDOP: '+' | '-';
+MULOP: '*' | '/' | '%';
+RELOP: '==' | '!=' | '<' | '<=' | '>' | '>=';
+LOGOP: '&&' | '||';
 
-// Palabras reservadas
-CLASS           : 'class' ;
-IF              : 'if' ;
-ELSE            : 'else' ;
-WHILE           : 'while' ;
-RETURN          : 'return' ;
+// Delimitadores
+LPAREN: '(';
+RPAREN: ')';
+LBRACE: '{';
+RBRACE: '}';
+LBRACK: '[';
+RBRACK: ']';
+SEMICOLON: ';';
+COMMA: ',';
 
-// Tipos
-INT_TYPE        : 'int' ;
-CHAR_TYPE       : 'char' ;
-DOUBLE_TYPE     : 'double' ;
-BOOL_TYPE       : 'bool' ;
-STRING_TYPE     : 'string' ;
+// Literales
+INT: [1-9][0-9]* | '0';
+DOUBLE: [0-9]+ '.' [0-9]+;
+CHAR: '\'' (~['\\\r\n] | '\\' [nrt'\\]) '\'';
+STRING: '"' (~["\\\r\n] | '\\' [nrt"\\])* '"';
+BOOL: 'true' | 'false';
 
-// Valores booleanos
-BOOL            : 'true' | 'false' ;
+// Identificadores
+ID: [a-zA-Z_][a-zA-Z0-9_]*;
 
-// Símbolos literales
-LBRACE          : '{' ;
-RBRACE          : '}' ;
-LPAREN          : '(' ;
-RPAREN          : ')' ;
-LBRACK          : '[' ;
-RBRACK          : ']' ;
-SEMICOLON       : ';' ;
-COMMA           : ',' ; 
+// Comentarios
+COMMENT: '/*' .*? '*/' -> skip;
+LINE_COMMENT: '//' ~[\r\n]* -> skip;
+
+// Espacios en blanco
+WS: [ \t\r\n]+ -> skip; 

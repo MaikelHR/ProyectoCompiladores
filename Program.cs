@@ -2,6 +2,7 @@
 using System.IO;
 using Antlr4.Runtime;
 using ProyectoCompi.Semantics;
+using ProyectoCompi.Gen;
 
 namespace ProyectoCompi
 {
@@ -36,20 +37,15 @@ namespace ProyectoCompi
                 var parser = new MiniCSharpParser(tokens);
                 var tree = parser.program();
                 
-                // Crear el visitor semántico
-                var visitor = new SemanticVisitor();
-                visitor.Visit(tree);
+                Console.WriteLine($"\nEl archivo {inputFile} es semánticamente correcto");
                 
-                // Mostrar errores si los hay
-                if (visitor.HasErrors)
-                {
-                    Console.WriteLine($"\nErrores semánticos en {inputFile}:");
-                    visitor.PrintErrors();
-                }
-                else
-                {
-                    Console.WriteLine($"\nEl archivo {inputFile} es semánticamente correcto");
-                }
+                // Generar el código
+                string outputFile = Path.ChangeExtension(inputFile, ".exe");
+                var codeGenerator = new CodeGeneratorVisitor(Path.GetFileNameWithoutExtension(inputFile));
+                codeGenerator.Visit(tree);
+                codeGenerator.SaveAssembly(outputFile);
+                
+                Console.WriteLine($"\nCódigo generado exitosamente en: {outputFile}");
             }
             catch (Exception ex)
             {
